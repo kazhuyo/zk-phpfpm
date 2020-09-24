@@ -1,0 +1,9 @@
+# language setting
+language: none
+
+pre_ci:
+      - docker build -t $SHIPPABLE_CONTAINER_NAME:latest
+build:
+    post_ci:
+      - sudo pip install -U docker-compose awscli
+      - docker commit $SHIPPABLE_CONTAINER_NAME
