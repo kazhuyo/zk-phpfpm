@@ -82,6 +82,9 @@ RUN set -x \
   && ln -sf /dev/stdout ${LOG_PREFIX}/access.log \
   && ln -sf /dev/stderr ${LOG_PREFIX}/error.log
 
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN ln -s /usr/local/bin/composer /usr/bin/composer
+
 COPY conf/monit/ /etc/monit.d/
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 COPY check_wwwdata.sh /usr/bin/check_wwwdata
